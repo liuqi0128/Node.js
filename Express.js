@@ -1,7 +1,7 @@
 // Express框架语法
 var express = require('express');//引入express框架文件
 var path = require('path');//路劲文件
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');//post请求处理方法
 
 var app = express();//创建 express 框架对象
 
@@ -10,7 +10,7 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); //post请求处理
 
 //开启服务  启动端口监听
 app.listen(9999, function() {
