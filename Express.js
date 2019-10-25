@@ -12,6 +12,12 @@ app.set('view engine','ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//开启服务  启动端口监听
+app.listen(9999, function() {
+  console.log('\x1B[32m成功开启服务....  http://127.0.0.1:9999 \x1B[40m');
+})
+
+
 // use 使用中间件   在post/get 请求监听,都会执行一次
 app.use(function(req,res,next){
 	console.log('aaaaa')
