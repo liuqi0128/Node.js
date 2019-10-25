@@ -81,4 +81,9 @@ app.get('/ejs',function(req,res){
 	}
 	// res.render('index', {name:'young'})
 	res.render('index', book)
-})
+}）
+
+	
+	
+	
+	
