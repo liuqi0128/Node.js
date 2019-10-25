@@ -89,7 +89,27 @@ app.get('/ejs',function(req,res){
 	res.render('index', book)
 }）
 
+Express框架中连接MYSQL 数据库进行增删改查
+npm i mysql   //下载mysql包
 	
+var mysql=require('mysql')//引入mysql
+
+//mysql数据库连接信息
+var connetcion=mysql.createConnection({
+    host:'127.0.0.1',
+    user:'root',
+    password:"root",
+    database:'stu'
+})
+
+connetcion.connect()//连接数据库
+
+connetcion.query('这里写SQL语句   ',function(error,results,fields){
+    if (error) throw error;
+	console.log('The solution is: ', results);
+})
+
+connetcion.end() //关闭数据库连接
 	
 	
 	
