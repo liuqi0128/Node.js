@@ -110,6 +110,62 @@ connetcion.query('这里写SQL语句   ',function(error,results,fields){
 })
 
 connetcion.end() //关闭数据库连接
+
+
+
+//multer插件使用-------上传文件
+var multer  = require('multer');   //引入插件
+
+var upload = multer({ dest: path.join(__dirname,'public','img') }) //定义单个上传文件的保存地址
+--------------------------
+var storage = multer.diskStorage({     //修改上传地址以及文件的信息修改
+	destination:function(req,file,cb){
+		cb(null, path.join(__dirname,'public','img'))
+	},
+	filename:function(req,file,cb){
+		console.log(file.originalname);
+		var hz = file.originalname.split('.');
+		cb(null, Date.now()+'.'+hz[hz.length-1])
+	}
+})
+
+var upload = multer({storage:storage});
+---------------------------------------------
+app.post('/up',upload.single('avatar'),function(req,res){    //添加上传文件的请求
+	res.send('ok')
+})	
+
+
+// express-session 插件   ---用来保存数据到服务器
+var session = require('express-session');   //引入插件
+app.use(session({
+	secret: 'yy',   //加密 密钥
+	cookie:{
+		maxAge: Date.now()+10000000   //保存时间
+	}
+}))
+
+app.get('/test1',function(req,res){
+	req.session.user = 'young' //创建一个session
+	res.render('test1')
+})
+app.get('/test2',function(req,res){
+	// req.session.user  ==>单独使用用来获取当前user 的session值
+	res.locals.user = req.session.user;
+	res.render('test2')
+	// res.render('test2',{user:'young'}) ===> res.locals.user = req.session.user;
+})
+
 	
-	
+
+
+
+
+
+
+
+
+
+
+
 	
